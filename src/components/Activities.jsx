@@ -29,26 +29,30 @@ export const options = {
 	tension: 0.4,
 };
 
-const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-
 function Activities() {
-	const [dataset, setDataset] = useState([]);
-	useEffect(() => {
-		fetchChartData();
-	}, []);
+
+	const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
+
+	const datasets = [
+		{
+			label: "Guest",
+			data: labels.map(() => faker.datatype.number({ min: 0, max: 500 })),
+			borderColor: "rgb(255, 99, 132)",
+			backgroundColor: "rgba(255, 99, 132, 0.5)",
+		},
+		{
+			label: "User",
+			data: labels.map(() => faker.datatype.number({ min: 0, max: 500 })),
+			borderColor: "rgb(53, 162, 235)",
+			backgroundColor: "rgba(53, 162, 235, 0.5)",
+		},
+	];
 
 	const data = {
 		labels,
-		datasets: dataset,
-	};
-
-	function fetchChartData() {
-		fetch(url + "/chartData")
-			.then((res) => res.json())
-			.then((chartData) => {
-				setDataset(chartData);
-			});
+		datasets
 	}
+
 	return (
 		<div className="mb-10 rounded-3xl bg-[#FFFFFF] p-10 pt-[30px]">
 			<h3 className="text-lg font-bold">Activities</h3>
